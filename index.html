@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Table Game</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .editable-table {
+      margin-top: 20px;
+    }
+    th {
+      background-color: #28a745;
+      color: white;
+      text-align: center;
+    }
+    td {
+      text-align: center;
+    }
+    .btn-add {
+      background-color: #28a745;
+      color: white;
+    }
+    .btn-delete {
+      background-color: #dc3545;
+      color: white;
+    }
+    .btn-delete:hover {
+      background-color: #c82333;
+    }
+    .btn-add:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 class="text-center mt-4">ตารางนับคะแนน</h2>
+    <button class="btn btn-add mb-3" onclick="addRow()">+ เพิ่มแถว</button>
+    <div class="table-responsive">
+      <table class="table table-bordered editable-table">
+        <thead>
+          <tr>
+            <th>ชื่อ</th>
+            <th>รอบ</th>
+            <th>คะแนน</th>
+            <th>จัดการ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Rows will be dynamically added here -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function addRow() {
+      const table = document.querySelector(".editable-table tbody");
+      const newRow = document.createElement("tr");
+
+      // Create editable cells
+      const nameCell = document.createElement("td");
+      nameCell.contentEditable = true;
+      nameCell.innerText = "ใส่ชื่อ";
+      newRow.appendChild(nameCell);
+
+      const roundCell = document.createElement("td");
+      roundCell.contentEditable = true;
+      roundCell.innerText = "1";
+      newRow.appendChild(roundCell);
+
+      const scoreCell = document.createElement("td");
+      scoreCell.contentEditable = true;
+      scoreCell.innerText = "0";
+      newRow.appendChild(scoreCell);
+
+      // Create delete button
+      const actionCell = document.createElement("td");
+      const deleteBtn = document.createElement("button");
+      deleteBtn.className = "btn btn-delete btn-sm";
+      deleteBtn.innerText = "ลบ";
+      deleteBtn.onclick = function () {
+        newRow.remove();
+      };
+      actionCell.appendChild(deleteBtn);
+      newRow.appendChild(actionCell);
+
+      table.appendChild(newRow);
+    }
+  </script>
+</body>
+</html>
